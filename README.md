@@ -3,7 +3,7 @@
 I'm a fan of automation. Give me a boring, repetitive task and I'll happily spend an
 afternoon building something to avoid doing it by hand — even when the math never quite
 works out in my favor. So when AI coding agents got good enough to actually *run* things
-— `terraform plan`, `aws ...`, `git push` — I wired one into my daily workflow and didn't
+like `terraform plan`, `aws ...`, `git push`, I wired one into my daily workflow and didn't
 look back.
 
 Then one evening, mid-`WebFetch`, it hit me: this thing reads arbitrary web pages, and it
