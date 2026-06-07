@@ -1,0 +1,6 @@
+# local audit logs (never commit these)
+*.log
+audit/
+# OS noise
+.DS_Store
+Thumbs.db

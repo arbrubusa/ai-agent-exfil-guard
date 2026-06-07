@@ -1,0 +1,27 @@
+{
+  "_comment": "Merge this into your ~/.claude/settings.json. Copy the two scripts to ~/.claude/hooks/ and chmod +x them.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/anti-exfil.sh",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/webfetch-allowlist.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
