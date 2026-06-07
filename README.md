@@ -45,7 +45,7 @@ answer is "not much." I went after the egress, not the injection.
 
 ## Defense in depth, in plain terms
 
-Four layers, ordered by how much they actually save you:
+Five layers, roughly ordered by how much they actually save you:
 
 1. **Least privilege.** The single biggest win. Run the agent with a read-only profile by
    default and elevate only for the task that needs it. If the agent can't read the secret,
@@ -57,6 +57,11 @@ Four layers, ordered by how much they actually save you:
    line.
 4. **Audit trail.** Log what gets blocked, and lean on cloud-side audit (CloudTrail and
    friends) for after-the-fact forensics.
+5. **Network egress controls.** The agent's traffic still has to leave your network. If you
+   already run an egress firewall, an IDS/IPS, or Geo-IP and reputation blocking at the
+   perimeter (in my homelab that's OPNsense with Suricata, CrowdSec, and Geo-IP filtering),
+   point them at outbound traffic too. A host-level hook and a network-level filter fail in
+   different ways, which is exactly why you want both, not one.
 
 The hooks live in layers 2 and 4. Let me show you.
 
@@ -151,6 +156,10 @@ I'm not a security researcher, and I'd rather you trust this *less* than oversel
 - **None of this replaces least privilege**. If your agent runs as admin, you're one clever
   page away from a bad day, hooks or not. Layer 1 is still the one that matters most.
 
+A determined exfil over an *allowed* host (a GitHub gist, a paste service) or via DNS can
+still slip past these hooks. That's where the network layer earns its keep: an egress rule
+that only lets the box reach what it actually needs catches traffic the hook never inspected.
+
 Think of the hooks as seatbelts. They won't save you from everything, but there's no reason to
 drive without them.
 
@@ -165,6 +174,18 @@ drive without them.
 4. Run the tests, restart your session, and you're covered.
 
 Requires `jq` (used to parse the hook input).
+
+## These hooks don't live alone
+
+They're part of a slightly bigger `PreToolUse` setup I run. A few others worth copying: one
+blocks `git commit --no-verify` (no bypassing your own checks), one refuses edits to linter
+and formatter configs (fix the code, not the rules), and one scans staged changes and commands
+for hardcoded secrets before they land. None are exotic, but together they make "the agent did
+something dumb" much harder.
+
+I also keep the threat model and these layers written down in [`SECURITY.md`](SECURITY.md). It
+sounds bureaucratic for a homelab, right up until the day you want to point the agent (or
+future-you) at the rules instead of trusting memory.
 
 ## What's next
 
