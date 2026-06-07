@@ -3,11 +3,11 @@
 I'm a fan of automation. Give me a boring, repetitive task and I'll happily spend an
 afternoon building something to avoid doing it by hand, even when the math never quite works
 out in my favor. So when AI coding agents got good enough to actually *run* things, like
-`terraform plan`, `aws ...`, and `git push`, I wired one into my daily workflow and didn't
-look back.
+`terraform plan`, `kubectl apply`, and `git push`, I wired one into my homelab workflow and
+didn't look back.
 
 Then one evening, mid-`WebFetch`, it hit me. This thing reads arbitrary web pages, and it
-runs with the exact same cloud credentials I do. What happens the day one of those pages
+runs with the exact same credentials I use to run my whole homelab. What happens the day one of those pages
 tells it to do something I never asked for?
 
 That question has a name, **indirect prompt injection**, and the more I dug in, the more I
@@ -21,9 +21,9 @@ and the honest limits of the approach. Everything here is in the repo, ready to 
 
 Here's the mental model that changed how I think about this.
 
-When you run an AI agent locally, it usually inherits *your* environment: your cloud profile,
-your `gh` token, your kubeconfig, your SSH keys. If your daily driver is an admin profile (be
-honest), so is the agent's.
+When you run an AI agent on your lab box, it usually inherits *your* environment: your cloud
+profile, your `gh` token, your homelab kubeconfig, your Proxmox API token, your SSH keys. If
+your daily driver is an admin profile (be honest), so is the agent's.
 
 Now add a second ingredient: a way out. `curl`, `wget`, an MCP tool, a `git push` to a repo
 someone else can read. That's an **egress channel**.
