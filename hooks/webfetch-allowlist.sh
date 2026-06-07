@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# webfetch-allowlist.sh — PreToolUse guardrail for the WebFetch tool (Claude Code).
+# webfetch-allowlist.sh: PreToolUse guardrail for the WebFetch tool (Claude Code).
 #
 # Fetching a page from a domain that isn't on your allowlist requires human
 # confirmation (permissionDecision: "ask"). This shrinks the indirect-prompt-
-# injection surface: the agent can't silently pull arbitrary web content — and
-# any instructions hidden inside it — without you deciding to.
+# injection surface: the agent can't silently pull arbitrary web content (and
+# any instructions hidden inside it) without you deciding to.
 #
 # Register with matcher "WebFetch".
 #

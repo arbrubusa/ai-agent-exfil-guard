@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# anti-exfil.sh — PreToolUse guardrail for AI coding agents (Claude Code).
+# anti-exfil.sh: PreToolUse guardrail for AI coding agents (Claude Code).
 #
 # Blocks the classic data-exfiltration shapes a prompt-injected agent would use:
 #   A) reading a secret/credential AND sending it over the network in one command
 #   B) piping an encoded payload (base64/gzip/...) into curl/wget/Invoke-WebRequest
 #   C) POST/PUT-ing data to a host that isn't on your allowlist
 #
-# It does NOT try to stop the agent from READING things — reading is harmless.
+# It does NOT try to stop the agent from READING things. Reading is harmless.
 # It stops the agent from ACTING on injected instructions with your credentials.
 #
 # Exit 2 = block (the stderr message is fed back to the model as feedback).

@@ -2,7 +2,7 @@
 # Feeds the sample payloads to the hook and prints allow / BLOCK for each.
 #
 # Why files instead of inline commands? Once the hook is live you literally
-# cannot type a trigger string on a command line to test it — the hook blocks
+# cannot type a trigger string on a command line to test it. The hook blocks
 # your own test command. So we keep the payloads in JSON files and pipe them in.
 #
 # Usage: ./run-tests.sh [path-to-anti-exfil.sh]
